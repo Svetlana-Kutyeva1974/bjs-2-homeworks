@@ -47,7 +47,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
         errorString += `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
         return errorString;
     }
-  else {
+  
   // код для задачи №2 писать здесь
 let bodyCredit, p;
 bodyCredit = amount - contribution;
@@ -60,6 +60,6 @@ let payment = bodyCredit * (p + p / (((1 + p) ** timeCredit) - 1));
 totalAmount = timeCredit * payment;
 //console.log(" платеж  и  сумма " + payment + "  " + (+totalAmount.toFixed(2)) );
 return +totalAmount.toFixed(2);
-  }
+  
 }
 
