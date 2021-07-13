@@ -127,7 +127,7 @@ giveBookByName(bookname) {
 
 }
 
-
+/*
 class Student {
   constructor(name) {
     this.name = name;
@@ -168,9 +168,63 @@ class Student {
     }
 
   }
+  */
+
+class Student {
+  constructor(name) {
+    this.name = name;
+    
+    //this.gender = gender;
+    //this.age = age;
+    this.objectOfMarks = [];
+    //this.objectOfMarks = [{subjectName: '', marks: []}];
+    //{subjectName: '', marks: []}
+  }
+
+
+  addGrade(mark, subjectName) {
+   
+    if (this.objectOfMarks.length === 0 && mark>0 && mark <6) {
+     
+      this.objectOfMarks.push({[subjectName]: [mark]});
+      //this.objectOfMarks[this.objectOfMarks.length][subjectName] = subjectName;
+     
+
+    }
+    else {
+     if (mark>0 && mark <6){
+        this.addGrades(mark, subjectName);
+      }
+      else {
+        alert(" Oшибка ввода оценки");
+      }
+     
+    }
+  }
+
+  addGrades(mark, subjectName) {
+   
+   
+
+      for (let key in this.objectOfMarks) {
+        
+          for (let prop in this.objectOfMarks[key]){
+
+            if (prop === subjectName) {
+           
+            this.objectOfMarks[key][prop].push(mark); return;
+           }
+          
+            
+        
+          }
+      }
+       this.objectOfMarks.push({[subjectName]: [mark]});
+   }
+
  
-  getAverage() {
-    return this.objectOfMarks.marks != undefined && this.objectOfMarks.marks.reduce((acc, item, idx, arr) => {
+  /*getAverage() {
+    return this.objectOfMarks != undefined && this.objectOfMarks.reduce((acc, item, idx, arr) => {
       acc += item;
       if (idx === arr.length - 1) {
         return acc / arr.length;
@@ -179,13 +233,32 @@ class Student {
         return acc;
       }
     })
+  }*/
+  getAverage() {
+    let acc = 0;
+    let length = 0;
+    for (let key in this.objectOfMarks) {
+        console.log("ищем    " + key);
+          for (let prop in this.objectOfMarks[key]){
+            acc += this.objectOfMarks[key][prop]; 
+            length += 1;
+           }
+      }
+      return acc / length;
+   }
+
+  getAverageBySubject(subjectName) {
+    return this.objectOfMarks != undefined && this.objectOfMarks.filter((item) => item === subjectName).reduce((acc, item, idx, arr) => {
+      acc += item;
+      if (idx === arr.length - 1) {
+        return acc / arr.length;
+      }
+      else {
+        return acc;
+      }
+    })
+
   }
 
-  getAverageBySubject(subjectName) {}
-
-  /*exclude(reason) {
-    delete this.marks;
-    delete this.subject;
-    this.excluded = reason;
-  }*/
+  
 }
