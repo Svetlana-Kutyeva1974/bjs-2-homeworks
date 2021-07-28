@@ -33,7 +33,7 @@ function debounceDecoratorNew(f, ms) {
     f.apply(this, args);
     isIgnore = true;
     setTimeout(() => { 
-      isCooldown = false;
+      isIgnore = false;
       f.apply(this, args);
      // console.timeEnd("tim");
     }, ms);
@@ -49,7 +49,7 @@ function debounceDecorator2(func, ms) {
       func.apply(this, args);
       isIgnore = true;
       setTimeout(() => {
-        isCooldown = false;
+        isIgnore = false;
         wrapper.conts ++;
         return func.apply(this, args);
       }, ms);
