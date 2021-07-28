@@ -44,14 +44,19 @@ class AlarmClock {
     let checkClock = alarm => {
      let currentTime = this.getCurrentFormattedTime();
       if (alarm.time === currentTime) {
-        //alarm.callback();
-        return console.log(`Будильник сработал на ${alarm.time} id ${alarm.id}`);
+        alarm.callback();
+        //return console.log(`Будильник сработал на ${alarm.time} id ${alarm.id}`);
       } 
     }
 
     if (this.timerId === null) {
       this.timerId = setInterval(this.alarmCollection.forEach((alarm) =>
-        checkClock.bind(alarm)), 3000);
+        checkClock(alarm)), 3000);
+      /*
+      Для стрелочной функции bind не используем, а если используем, то привязка к коллекции, а не к alarm:
+      this.timerId = setInterval(this.alarmCollection.forEach((alarm) =>
+        checkClock.bind(this.alarmCollection)), 3000);
+        */
     }
   }
 
